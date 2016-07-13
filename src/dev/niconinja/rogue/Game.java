@@ -2,8 +2,10 @@ package dev.niconinja.rogue;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import dev.niconinja.rogue.display.*;
+import dev.niconinja.rogue.gfx.ImageLoader;
 
 //Most important class in the game. Includes most of the games code.
 public class Game implements Runnable {
@@ -18,7 +20,7 @@ public class Game implements Runnable {
 	private boolean running = false;
 	
 	private BufferStrategy bs;
-	private Graphics g;
+	private Graphics g;	
 	
 	public Game(String title, int width, int height){
 		this.width = width;
@@ -29,6 +31,7 @@ public class Game implements Runnable {
 	//Initializes everything.
 	private void init(){
 		display = new Display(title, width, height);
+
 	}
 	
 	//Updates variables.
@@ -44,11 +47,16 @@ public class Game implements Runnable {
 			return;
 		}
 		g = bs.getDrawGraphics();
+		
+		//Clear screen.
+		g.clearRect(0, 0, width, height);
+		
 		//Draw start:
 		
-		
+
 		
 		//Draw end.
+		
 		bs.show();
 		g.dispose();
 	}
