@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 
 public class ImageLoader {
 	
+	//Loads the image, if it fails ends the program.
 	public static BufferedImage loadImage(String path){
 		try {
 			return ImageIO.read(ImageLoader.class.getResource(path));

@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import dev.niconinja.rogue.display.*;
 import dev.niconinja.rogue.gfx.ImageLoader;
+import dev.niconinja.rogue.gfx.SpriteSheet;
 
 //Most important class in the game. Includes most of the games code.
 public class Game implements Runnable {
@@ -15,12 +16,15 @@ public class Game implements Runnable {
 	public String title;
 	public int width, height;
 
-	//Thread anf properties of it.
+	//Thread and properties of it.
 	private Thread thread;
 	private boolean running = false;
 	
 	private BufferStrategy bs;
-	private Graphics g;	
+	private Graphics g;
+	
+	private BufferedImage test;
+	private SpriteSheet sheet;
 	
 	public Game(String title, int width, int height){
 		this.width = width;
@@ -31,7 +35,8 @@ public class Game implements Runnable {
 	//Initializes everything.
 	private void init(){
 		display = new Display(title, width, height);
-
+		test = ImageLoader.loadImage("/textures/Classes.png");
+		sheet = new SpriteSheet(test);
 	}
 	
 	//Updates variables.
@@ -53,7 +58,8 @@ public class Game implements Runnable {
 		
 		//Draw start:
 		
-
+		g.drawImage(sheet.split(16, 0, 16, 16), 5, 5, null);
+		g.drawImage(sheet.split(0, 0, 16, 16), 21, 21, null);
 		
 		//Draw end.
 		
@@ -74,7 +80,7 @@ public class Game implements Runnable {
 		
 	}
 	
-	//Starts the seperate thread the game is running on.
+	//Starts the separate thread the game is running on.
 	public synchronized void start(){
 		if(running){
 			return;
