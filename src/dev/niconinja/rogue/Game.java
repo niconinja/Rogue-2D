@@ -2,9 +2,9 @@ package dev.niconinja.rogue;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 import dev.niconinja.rogue.display.*;
+import dev.niconinja.rogue.gfx.Assets;
 import dev.niconinja.rogue.gfx.ImageLoader;
 import dev.niconinja.rogue.gfx.SpriteSheet;
 
@@ -23,9 +23,6 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 	
-	private BufferedImage test;
-	private SpriteSheet sheet;
-	
 	public Game(String title, int width, int height){
 		this.width = width;
 		this.height = height;					
@@ -35,8 +32,7 @@ public class Game implements Runnable {
 	//Initializes everything.
 	private void init(){
 		display = new Display(title, width, height);
-		test = ImageLoader.loadImage("/textures/Classes.png");
-		sheet = new SpriteSheet(test);
+		Assets.init();
 	}
 	
 	//Updates variables.
@@ -58,8 +54,7 @@ public class Game implements Runnable {
 		
 		//Draw start:
 		
-		g.drawImage(sheet.split(16, 0, 16, 16), 5, 5, null);
-		g.drawImage(sheet.split(0, 0, 16, 16), 21, 21, null);
+		g.drawImage(Assets.thief, 10, 10, null);
 		
 		//Draw end.
 		
