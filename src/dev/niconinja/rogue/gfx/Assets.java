@@ -2,6 +2,7 @@ package dev.niconinja.rogue.gfx;
 
 import java.awt.image.BufferedImage;
 
+//Splits the spritesheet.
 public class Assets {
 	
 	private static final int width = 32, height = 32;

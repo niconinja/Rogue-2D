@@ -22,7 +22,13 @@ public class Game implements Runnable {
 	private Thread thread;
 	private boolean running = false;
 	
-	//Graphics 
+	/* Graphics
+	 * Buffer-strategy: Allows buffers to exist. Those are early versions of the image that will be displayed.
+	 * 					They are used to remove flickering etc. from the display.
+	 * Graphics:		Mainly two kinds of methods: 	draw and fill methods: enable drawing things,
+	 * 													attribute setting methods: affect how stuff appears
+	 *  
+	 */
 	private BufferStrategy bs;
 	private Graphics g;
 	
@@ -34,6 +40,7 @@ public class Game implements Runnable {
 	//Input
 	private KeyManager keyManager;
 	
+	//Parameters = variables, constructs a keyManager
 	public Game(String title, int width, int height){
 		this.width = width;
 		this.height = height;					
@@ -44,10 +51,12 @@ public class Game implements Runnable {
 	
 	//Initializes everything.
 	private void init(){
+		//new display, adds keyListener to it
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 		
+		//initializes all the states, sets current state to gameState
 		gameState = new GameState(this);
 		menuState = new MenuState(this);
 		settingsState = new SettingsState(this);
@@ -66,6 +75,7 @@ public class Game implements Runnable {
 	
 	//Shows everything on the screen.
 	private void render(){
+		//Sets up the bufferStrategy, sets the graphics object equal to the final buffer
 		bs = display.getCanvas().getBufferStrategy();
 		if(bs == null){
 			display.getCanvas().createBufferStrategy(3);
@@ -76,23 +86,25 @@ public class Game implements Runnable {
 		//Clear screen.
 		g.clearRect(0, 0, width, height);
 		
-		//Draw start:
+		//things to draw start:
 		
 		if(State.getState() != null){
 			State.getState().render(g);
 		}
 		
-		//Draw end.
+		//things to draw end.
 		
+		//draws the latest buffer to the screen, removes the "screen" from the graphics object.
 		bs.show();
 		g.dispose();
 	}
 	
-	//Main game loop.
+	//Main game loop. + init etc.
 	public void run(){
 		
 		init();
 		
+		//Sets the game loop to run at constant 60 frames.
 		int fps = 60;
 		double timePerTick = 1000000000 / fps;
 		double delta = 0;
@@ -101,7 +113,7 @@ public class Game implements Runnable {
 		long timer = 0;
 		long ticks = 0;
 		
-		
+		//game loop
 		while(running){
 			
 			now = System.nanoTime();
@@ -142,7 +154,7 @@ public class Game implements Runnable {
 		thread.start();
 	}
 	
-	//Ends the seperate thread the game is running on.
+	//Ends the separate thread the game is running on.
 	public synchronized void stop(){
 		if(!running){
 			return;

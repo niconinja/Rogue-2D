@@ -12,6 +12,7 @@ public class Display {
 	private String title;
 	private int width, height;
 	
+	//Takes in the parameters and sets them equal to this classes variables. Creates a Window.
 	public Display(String title, int width, int height){
 		this.title = title;
 		this.width = width;

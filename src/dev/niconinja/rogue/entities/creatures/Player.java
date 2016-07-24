@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import dev.niconinja.rogue.Game;
 import dev.niconinja.rogue.gfx.Assets;
 
+//creature that can be controlled.
 public class Player extends Creature{
 
 	private Game game;
@@ -32,7 +33,7 @@ public class Player extends Creature{
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.mage,(int) x,(int) y, null);
+		g.drawImage(Assets.thief,(int) x,(int) y, null);
 	}
 
 }
