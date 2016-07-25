@@ -1,4 +1,4 @@
-//TODO: Camera stuff
+//TODO: Camera stuff, change tree texture to fit the desert theme
 package dev.niconinja.rogue;
 
 import java.awt.*;
