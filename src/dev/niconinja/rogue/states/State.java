@@ -6,6 +6,7 @@ import dev.niconinja.rogue.Game;
 
 public abstract class State {
 	
+	//State-manager
 	private static State currentState = null;
 	
 	public static void setState(State state){
@@ -16,8 +17,9 @@ public abstract class State {
 		return currentState;
 	}
 	
-	//actual Class
 	
+	
+	//actual Class	
 	protected Game game;
 	
 	public State(Game game){

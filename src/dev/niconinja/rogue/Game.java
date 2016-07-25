@@ -1,5 +1,4 @@
-//TODO continue with creature sizing
-
+//TODO: Camera stuff
 package dev.niconinja.rogue;
 
 import java.awt.*;
