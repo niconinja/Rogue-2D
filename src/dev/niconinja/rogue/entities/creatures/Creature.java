@@ -1,6 +1,8 @@
 package dev.niconinja.rogue.entities.creatures;
 
+import dev.niconinja.rogue.Handler;
 import dev.niconinja.rogue.entities.*;
+import dev.niconinja.rogue.tiles.Tile;
 
 //abstract class for all creatures to inherit.
 public abstract class Creature extends Entity{
@@ -15,8 +17,8 @@ public abstract class Creature extends Entity{
 	protected float speed;
 	protected float xMove, yMove;
 	
-	public Creature(float x, float y, int width, int height) {
-		super(x, y, width, height);
+	public Creature(Handler handler, float x, float y, int width, int height) {
+		super(handler, x, y, width, height);
 		health = DEFAULT_HEALTH;
 		speed = DEFAULT_SPEED;
 		xMove = 0;
@@ -24,10 +26,55 @@ public abstract class Creature extends Entity{
 	}
 	
 	public void move(){
-		x += xMove;
-		y += yMove;
+		moveX();
+		moveY();
 	}
 
+	public void moveX(){
+		if(xMove > 0){//moving right
+			int tx = (int) (x + xMove + bounds.x + bounds.width) / Tile.TILE_WIDTH;
+			if(walkableTile(tx, (int) (y + bounds.y) / Tile.TILE_HEIGHT) &&
+					walkableTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TILE_HEIGHT)){
+				x += xMove;
+			}else{
+				x = tx * Tile.TILE_WIDTH - bounds.x - bounds.width - 1;
+			}
+		}
+		else if(xMove < 0){//moving left
+			int tx = (int) (x + xMove + bounds.x) / Tile.TILE_WIDTH;
+			if(walkableTile(tx, (int) (y + bounds.y) / Tile.TILE_HEIGHT) &&
+					walkableTile(tx, (int) (y + bounds.y + bounds.height) / Tile.TILE_HEIGHT)){
+				x += xMove;
+			}else{
+				x = tx * Tile.TILE_WIDTH + Tile.TILE_WIDTH - bounds.x + 1;
+			}
+		}
+	}
+	
+	public void moveY(){
+		if(yMove < 0){//moving up
+			int ty = (int) (y + yMove + bounds.y) / Tile.TILE_HEIGHT;
+			if(walkableTile((int) (x + bounds.x) / Tile.TILE_WIDTH, ty) &&
+					(walkableTile((int) (x + bounds.x + bounds.width) / Tile.TILE_WIDTH, ty))){
+				y += yMove;
+			}else{
+				y = ty * Tile.TILE_HEIGHT + Tile.TILE_HEIGHT - bounds.y + 1;
+			}
+		}
+		else if(yMove > 0){//moving down
+			int ty = (int) (y + yMove + bounds.y + bounds.height) / Tile.TILE_HEIGHT;
+			if(walkableTile((int) (x + bounds.x) / Tile.TILE_WIDTH, ty) &&
+					(walkableTile((int) (x + bounds.x + bounds.width) / Tile.TILE_WIDTH, ty))){
+				y += yMove;
+			}else{
+				y = ty * Tile.TILE_HEIGHT - bounds.y - bounds.height - 1;
+			}
+		}
+	}
+	
+	protected boolean walkableTile(int x, int y){
+		return handler.getWorld().getTile(x, y).isWalkable();
+	}
 	
 	//Getters and setters
 	public int getHealth() {

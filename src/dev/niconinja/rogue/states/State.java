@@ -1,8 +1,7 @@
 package dev.niconinja.rogue.states;
 
 import java.awt.Graphics;
-
-import dev.niconinja.rogue.Game;
+import dev.niconinja.rogue.Handler;
 
 public abstract class State {
 	
@@ -20,10 +19,10 @@ public abstract class State {
 	
 	
 	//actual Class	
-	protected Game game;
+	protected Handler handler;
 	
-	public State(Game game){
-		this.game = game;
+	public State(Handler handler){
+		this.handler = handler;
 	}
 	
 	public abstract void tick();

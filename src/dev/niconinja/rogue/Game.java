@@ -1,4 +1,4 @@
-//TODO: Camera stuff, change tree texture to fit the desert theme
+//TODO: change tree texture to fit the desert theme, Animations!
 package dev.niconinja.rogue;
 
 import java.awt.*;
@@ -6,6 +6,7 @@ import java.awt.image.BufferStrategy;
 
 import dev.niconinja.rogue.display.*;
 import dev.niconinja.rogue.gfx.Assets;
+import dev.niconinja.rogue.gfx.Camera;
 import dev.niconinja.rogue.input.KeyManager;
 import dev.niconinja.rogue.states.*;
 
@@ -15,7 +16,7 @@ public class Game implements Runnable {
 	//Display and properties of it.
 	private Display display;
 	public String title;
-	public int width, height;
+	private int width, height;
 
 	//Thread and properties of it.
 	private Thread thread;
@@ -33,11 +34,17 @@ public class Game implements Runnable {
 	
 	//States
 	private State gameState;
-	private State menuState;
-	private State settingsState;
+	//private State menuState;
+	//private State settingsState;
 	
 	//Input
 	private KeyManager keyManager;
+	
+	//Camera
+	private Camera camera;
+	
+	//Handler
+	private Handler handler;
 	
 	//Parameters = variables, constructs a keyManager
 	public Game(String title, int width, int height){
@@ -55,10 +62,14 @@ public class Game implements Runnable {
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 		
+		handler = new Handler(this);
+		
+		camera = new Camera(handler, 0,0);
+			
 		//initializes all the states, sets current state to gameState
-		gameState = new GameState(this);
-		menuState = new MenuState(this);
-		settingsState = new SettingsState(this);
+		gameState = new GameState(handler);
+		//menuState = new MenuState(handler);
+		//settingsState = new SettingsState(handler);
 		State.setState(gameState);
 	}
 	
@@ -141,6 +152,18 @@ public class Game implements Runnable {
 	
 	public KeyManager getKeyManager(){
 		return keyManager;
+	}
+	
+	public Camera getCamera(){
+		return camera;
+	}
+	
+	public int getWidth(){
+		return width;
+	}
+	
+	public int getHeight(){
+		return height;
 	}
 	
 	//Starts the separate thread the game is running on.

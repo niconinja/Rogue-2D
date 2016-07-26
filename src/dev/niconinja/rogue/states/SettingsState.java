@@ -1,13 +1,12 @@
 package dev.niconinja.rogue.states;
 
 import java.awt.Graphics;
-
-import dev.niconinja.rogue.Game;
+import dev.niconinja.rogue.Handler;
 
 public class SettingsState extends State{
 
-	public SettingsState(Game game){
-		super(game);
+	public SettingsState(Handler handler){
+		super(handler);
 	}
 
 	@Override

@@ -32,6 +32,7 @@ public class Display {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
+		
 		//Creates the main canvas and sets it's properties.
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
@@ -43,6 +44,7 @@ public class Display {
 		frame.add(canvas);
 		frame.pack();
 	}
+	
 	
 	public Canvas getCanvas(){
 		return canvas;

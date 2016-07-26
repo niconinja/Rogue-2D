@@ -7,7 +7,7 @@ public class Assets {
 	
 	private static final int width = 32, height = 32;
 	
-	public static BufferedImage mage, warrior, thief, archer, wall, ground, tree, water;
+	public static BufferedImage mage, warrior, thief, archer, wall, ground, tree, water, player;
 	
 	public static void init(){
 		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/allTextures.png"));
@@ -20,6 +20,7 @@ public class Assets {
 		ground = sheet.split(width, height, width, height);
 		tree = sheet.split(width * 2, height, width, height);
 		water = sheet.split(width * 3, height, width, height);
+		player = sheet.split(0, height * 2, width, height);
 	}
 
 }

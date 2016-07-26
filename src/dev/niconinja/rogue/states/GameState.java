@@ -1,8 +1,7 @@
 package dev.niconinja.rogue.states;
 
 import java.awt.Graphics;
-
-import dev.niconinja.rogue.Game;
+import dev.niconinja.rogue.Handler;
 import dev.niconinja.rogue.entities.creatures.Player;
 import dev.niconinja.rogue.worlds.World;
 
@@ -11,10 +10,11 @@ public class GameState extends State {
 	private Player player;
 	private World world;
 	
-	public GameState(Game game){
-		super(game);
-		player = new Player(game, 0, 0);
-		world = new World("res/worlds/world1.map");
+	public GameState(Handler handler){
+		super(handler);
+		world = new World(handler, "res/worlds/world1.map");
+		handler.setWorld(world);
+		player = new Player(handler, 0, 0);
 	}
 	
 	@Override
