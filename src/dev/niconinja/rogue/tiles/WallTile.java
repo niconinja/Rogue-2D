@@ -5,7 +5,8 @@ import dev.niconinja.rogue.gfx.Assets;
 public class WallTile extends Tile{
 
 	public WallTile(int id) {
-		super(Assets.wall, id);
+		super(id);
+		setTexture(Assets.wall);
 	}
 
 	@Override

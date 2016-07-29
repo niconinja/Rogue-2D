@@ -5,7 +5,8 @@ import dev.niconinja.rogue.gfx.Assets;
 public class GroundTile extends Tile{
 
 	public GroundTile(int id) {
-		super(Assets.ground, id);
+		super(id);
+		setTexture(Assets.ground);
 	}
 
 }

@@ -20,8 +20,7 @@ public class Tile {
 	protected BufferedImage texture;
 	protected final int id;
 	
-	public Tile(BufferedImage texture, int id){
-		this.texture = texture;
+	public Tile(int id){
 		this.id = id;
 		
 		tiles[id] = this;
@@ -37,6 +36,10 @@ public class Tile {
 	
 	public boolean isWalkable(){
 		return true;
+	}
+	
+	public void setTexture(BufferedImage texture){
+		this.texture = texture;
 	}
 	
 	public int getId(){

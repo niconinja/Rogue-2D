@@ -1,4 +1,4 @@
-//TODO: change tree texture to fit the desert theme, Animations!
+//TODO: Entity Manager
 package dev.niconinja.rogue;
 
 import java.awt.*;
